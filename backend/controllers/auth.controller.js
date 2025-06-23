@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import { generateTokenAndSetCookie } from "./utils/generateToken.js";
+import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
   try {
@@ -121,10 +121,10 @@ export const logout = async (req, res) => {
 };
 
 export const checkAuth = async (req, res) => {
-    try {
-        const user = await User.findById(req.user._id).select("-password");
-        res.status(200).json({ message: "User found", data: user });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.status(200).json({ message: "User found", data: user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
